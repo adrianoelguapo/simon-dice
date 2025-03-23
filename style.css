@@ -23,5 +23,40 @@ body{
     font-family: 'glitch-goblin';
     font-size: 7.5rem;
     color: white;
-    margin-top: 12.5%;
+    margin-top: 18%;
+}
+
+.index-link {
+    position: relative;
+    display: inline-block;
+    font-family: 'sd-dystopian';
+    font-size: 2rem;
+    color: #ffffff;
+    text-decoration: none;
+    text-align: center;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    overflow: hidden;
+    
+    /* Fondo "glass" */
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+
+    /* Glow inicial */
+    text-shadow: 0 0 5px #ff00ff;
+
+    /* Transición suave */
+    transition: all 0.3s ease;
+
+    /* Ancho fijo y borde neón estático */
+    width: 22.5%;
+    border: 2px solid #ff00ff;
+}
+
+.index-link:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+    transform: scale(1.05);
+    border-color: #00ffff;
+    box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
 }
