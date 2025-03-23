@@ -1,0 +1,27 @@
+/* --- Importar fuentes --- */
+@font-face{
+    font-family: 'sd-dystopian';
+    src: url('fonts/Sddystopiandemo-GO7xa.otf');
+}
+
+@font-face{
+    font-family: 'glitch-goblin';
+    src: url('fonts/GlitchGoblin-2O87v.ttf');
+}
+
+/* --- Estilos generales --- */
+body{
+    margin: 0;
+    background-image: url('images/bg.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+}
+
+/* --- Estilos para la página de inicio (index.html) --- */
+.index-title{
+    font-family: 'glitch-goblin';
+    font-size: 7.5rem;
+    color: white;
+    margin-top: 12.5%;
+}
