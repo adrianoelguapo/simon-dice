@@ -32,8 +32,8 @@ $(document).ready(function() {
       let currentIndex = userSequence.length - 1;
       // Comparar el color seleccionado con la secuencia de la máquina
       if (userSequence[currentIndex] !== machineSequence[currentIndex]) {
-        alert("Game Over! You reached round " + round);
-        resetGame();
+        // Mostrar el modal en lugar de alert
+        showModal("Game Over! You reached round " + round);
         return;
       }
       // Si la secuencia del usuario es completa y correcta
@@ -92,6 +92,20 @@ $(document).ready(function() {
       round = 1;
       $roundIndicator.text(round);
       setTimeout(nextRound, 1000);
+    }
+  
+    // Función para mostrar el modal de Bootstrap con un mensaje
+    function showModal(message) {
+      // Actualizar el contenido del modal
+      $("#notificationModal .modal-body").text(message);
+      // Inicializar y mostrar el modal
+      let modalElement = document.getElementById("notificationModal");
+      let modal = new bootstrap.Modal(modalElement);
+      modal.show();
+      // Una vez que se cierre el modal, reiniciar el juego
+      $(modalElement).one('hidden.bs.modal', function () {
+        resetGame();
+      });
     }
   
     // Asignar funcionalidad al botón Reset (solo el botón, no el enlace Home)

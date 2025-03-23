@@ -1,12 +1,9 @@
 $(document).ready(function() {
-    // Arrays para almacenar la secuencia de la máquina y del usuario
     let machineSequence = [];
     let userSequence = [];
     let round = 1;
     let colors = ["blue", "pink", "violet", "white"];
     let $roundIndicator = $("#round-number");
-    
-    // Variable para almacenar la rotación actual del contenedor (inicialmente 45° como en el CSS)
     let currentRotation = 45;
   
     // Cache de los elementos de cada segmento
@@ -40,8 +37,7 @@ $(document).ready(function() {
       let currentIndex = userSequence.length - 1;
       // Comparar el color seleccionado con la secuencia de la máquina
       if (userSequence[currentIndex] !== machineSequence[currentIndex]) {
-        alert("Game Over! You reached round " + round);
-        resetGame();
+        showModal("Game Over! You reached round " + round);
         return;
       }
       // Si la secuencia del usuario es completa y correcta
@@ -53,16 +49,13 @@ $(document).ready(function() {
       }
     }
   
-    // Función para iniciar la siguiente ronda (modo difícil)
+    // Función para iniciar la siguiente ronda
     function nextRound() {
-      // Genera un color aleatorio y lo añade a la secuencia de la máquina
       let randomColor = colors[Math.floor(Math.random() * colors.length)];
       machineSequence.push(randomColor);
       
-      // ROTACIÓN: Se elige aleatoriamente un número de posiciones (1 a 3) y una dirección (izquierda o derecha).
-      // Cada "posición" equivale a 90°.
-      let positions = Math.floor(Math.random() * 3) + 1;  // 1, 2 o 3
-      let direction = Math.random() < 0.5 ? -1 : 1;         // -1 para izquierda, 1 para derecha
+      let positions = Math.floor(Math.random() * 3) + 1;
+      let direction = Math.random() < 0.5 ? -1 : 1;
       let rotationIncrement = direction * positions * 90;
       currentRotation += rotationIncrement;
       $(".simon-container").css("transform", "rotate(" + currentRotation + "deg)");
@@ -108,10 +101,24 @@ $(document).ready(function() {
       machineSequence = [];
       userSequence = [];
       round = 1;
-      currentRotation = 45;  // Reinicia la rotación a 45° (valor inicial)
+      currentRotation = 45;
       $roundIndicator.text(round);
       $(".simon-container").css("transform", "rotate(" + currentRotation + "deg)");
       setTimeout(nextRound, 1000);
+    }
+
+    // Función para mostrar el modal de Bootstrap con un mensaje
+    function showModal(message) {
+        // Actualizar el contenido del modal
+        $("#notificationModal .modal-body").text(message);
+        // Inicializar y mostrar el modal
+        let modalElement = document.getElementById("notificationModal");
+        let modal = new bootstrap.Modal(modalElement);
+        modal.show();
+        // Una vez que se cierre el modal, reiniciar el juego
+        $(modalElement).one('hidden.bs.modal', function () {
+            resetGame();
+        });
     }
   
     // Iniciar el juego
