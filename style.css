@@ -111,7 +111,7 @@ body{
     text-decoration: none;
 }
 
-.hover-btn:hover{
+.home-btn:hover{
     background-color: rgba(255, 255, 255, 0.2);
     border-color: #00ffff;
     box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
@@ -191,25 +191,26 @@ body{
 }
 
 /* --- Estilos para los modales --- */
-.modal-content {
-    background: rgba(0, 0, 0, 0.85);
-    border: 2px solid #ff00ff; /* Borde neon */
+.modal-content{
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border: 2px solid #ff00ff;
     box-shadow: 0 0 20px rgba(0, 255, 255, 0.7), 0 0 30px rgba(255, 0, 255, 0.7);
     color: #fff;
     border-radius: 10px;
 }
 
-.modal-header {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+.modal-header{
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
 }
 
-.modal-title {
+.modal-title{
     font-family: 'glitch-goblin';
-    color: #00ffff;
+    color: #fff;
     text-shadow: 0 0 5px #ff00ff;
 }
 
-.modal-body {
+.modal-body{
     font-family: 'sd-dystopian';
     font-size: 1.2rem;
     color: #fff;
@@ -217,17 +218,15 @@ body{
     padding: 1rem;
 }
 
-.modal-footer {
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
+.modal-footer{
+    border-top: 1px solid rgba(255, 255, 255, 0.4);
 }
 
-/* Personalización del botón de cierre (btn-close) */
-.btn-close {
-    filter: invert(1);  /* Hace que el icono de cierre sea blanco */
+.btn-close{
+    filter: invert(1);
 }
 
-/* Botón personalizado en el modal (clase .modal-button) */
-.modal-button {
+.modal-button{
     background-color: transparent;
     border: 2px solid #ff00ff;
     border-radius: 4px;
@@ -235,7 +234,7 @@ body{
     padding: 0.5rem 1rem;
     transition: all 0.3s ease;
 }
-.modal-button:hover {
+.modal-button:hover{
     background-color: rgba(255, 255, 255, 0.2);
     border-color: #00ffff;
     box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;

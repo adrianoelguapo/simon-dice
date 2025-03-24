@@ -1,42 +1,43 @@
 $(document).ready(function() {
-    // Arrays para almacenar la secuencia de la máquina y del usuario
     let machineSequence = [];
     let userSequence = [];
     let round = 1;
     let colors = ["blue", "pink", "violet", "white"];
     let $roundIndicator = $("#round-number");
   
-    // Cache de los elementos de cada segmento
+    /* Cache de los elementos de cada segmento */
     let $segmentBlue = $(".segment-blue");
     let $segmentPink = $(".segment-pink");
     let $segmentViolet = $(".segment-violet");
     let $segmentWhite = $(".segment-white");
   
-    // Asignar eventos de clic a cada segmento
+    /* Asignar eventos de clic a cada segmento */
     $segmentBlue.on("click", function() {
       handleUserClick("blue");
     });
+
     $segmentPink.on("click", function() {
       handleUserClick("pink");
     });
+
     $segmentViolet.on("click", function() {
       handleUserClick("violet");
     });
+
     $segmentWhite.on("click", function() {
       handleUserClick("white");
     });
   
-    // Función para manejar el clic del usuario
+    /* Función para manejar el clic del usuario */
     function handleUserClick(color) {
       userSequence.push(color);
       let currentIndex = userSequence.length - 1;
-      // Comparar el color seleccionado con la secuencia de la máquina
+
       if (userSequence[currentIndex] !== machineSequence[currentIndex]) {
-        // Mostrar el modal en lugar de alert
         showModal("Game Over! You reached round " + round);
         return;
       }
-      // Si la secuencia del usuario es completa y correcta
+
       if (userSequence.length === machineSequence.length) {
         round++;
         $roundIndicator.text(round);
@@ -45,29 +46,32 @@ $(document).ready(function() {
       }
     }
   
-    // Función para iniciar la siguiente ronda
+    /* Función para iniciar la siguiente ronda */
     function nextRound() {
       let randomColor = colors[Math.floor(Math.random() * colors.length)];
       machineSequence.push(randomColor);
       playSequence();
     }
   
-    // Función para reproducir la secuencia de la máquina
+    /* Función para reproducir la secuencia de la máquina */
     function playSequence() {
       let index = 0;
+
       let interval = setInterval(function() {
         if (index >= machineSequence.length) {
           clearInterval(interval);
           return;
         }
+
         flashColor(machineSequence[index]);
         index++;
       }, 800);
     }
   
-    // Función para simular el "flash" (parpadeo) del segmento
+    /* Función para simular el parpadeo del segmento */
     function flashColor(color) {
       let $segment;
+
       if (color === "blue") {
         $segment = $segmentBlue;
       } else if (color === "pink") {
@@ -77,6 +81,7 @@ $(document).ready(function() {
       } else if (color === "white") {
         $segment = $segmentWhite;
       }
+
       if ($segment) {
         $segment.addClass("active");
         setTimeout(function() {
@@ -85,7 +90,7 @@ $(document).ready(function() {
       }
     }
   
-    // Función para reiniciar el juego
+    /* Función para reiniciar el juego */
     function resetGame() {
       machineSequence = [];
       userSequence = [];
@@ -94,25 +99,24 @@ $(document).ready(function() {
       setTimeout(nextRound, 1000);
     }
   
-    // Función para mostrar el modal de Bootstrap con un mensaje
+    /* Función para mostrar el modal de Bootstrap con un mensaje */
     function showModal(message) {
-      // Actualizar el contenido del modal
       $("#notificationModal .modal-body").text(message);
-      // Inicializar y mostrar el modal
+
       let modalElement = document.getElementById("notificationModal");
       let modal = new bootstrap.Modal(modalElement);
       modal.show();
-      // Una vez que se cierre el modal, reiniciar el juego
+
       $(modalElement).one('hidden.bs.modal', function () {
         resetGame();
       });
     }
   
-    // Asignar funcionalidad al botón Reset (solo el botón, no el enlace Home)
+    /* Botón de reset */
     $("button.reset-btn").on("click", function() {
       resetGame();
     });
   
-    // Iniciar el juego
+    /* Iniciar el juego */
     nextRound();
 });
